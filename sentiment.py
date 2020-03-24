@@ -157,16 +157,72 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
     # English stopwords from nltk
     stopwords = set(nltk.corpus.stopwords.words('english'))
 
+    featureTexts=[]
     # Determine a list of words that will be used as features.
     # This list should have the following properties:
     #   (1) Contains no stop words
     #   (2) Is in at least 1% of the positive texts or 1% of the negative texts
     #   (3) Is in at least twice as many postive texts as negative texts, or vice-versa.
-    # YOUR CODE HERE
+    all_positive_word=[]
+    all_neg_word=[]
+    for tweets in train_pos:
+        all_positive_word.extend(list(tweets))
+
+    for tweets in train_neg:
+        all_neg_word.extend(list(tweets))
+
+    positive_word=set(all_positive_word)
+    neg_word=set(all_neg_word)
+    allwords=positive_word.union(neg_word)
+
+    for word in allwords:
+        pos_freq_word=all_positive_word.count(word)
+        neg_freq_word=all_neg_word.count(word)
+        if word not in stopwords and pos_freq_word > 0.01* len(all_positive_word) or neg_freq_word > 0.01* len(all_neg_word) and pos_freq_word>2*neg_freq_word or neg_freq_word>2* pos_freq_word:
+            featureTexts.add(word)
 
     # Using the above words as features, construct binary vectors for each text in the training and test set.
     # These should be python lists containing 0 and 1 integers.
     # YOUR CODE HERE
+    train_pos_vec=[]
+    for text in train_pos:
+        this_vec=[]
+        for word in text:
+            if(featureTexts.contains(word)):
+                this_vec.append(1)
+            else:
+                this_vec.append(0)
+        train_pos_vec.append(this_vec)
+
+    train_neg_vec = []
+    for text in train_neg:
+        this_vec = []
+        for word in text:
+            if (featureTexts.contains(word)):
+                this_vec.append(1)
+            else:
+                this_vec.append(0)
+        train_neg_vec.append(this_vec)
+
+    test_pos_vec = []
+    for text in test_pos:
+        this_vec = []
+        for word in text:
+            if (featureTexts.contains(word)):
+                this_vec.append(1)
+            else:
+                this_vec.append(0)
+        test_pos_vec.append(this_vec)
+
+    test_neg_vec = []
+    for text in test_neg:
+        this_vec = []
+        for word in text:
+            if (featureTexts.contains(word)):
+                this_vec.append(1)
+            else:
+                this_vec.append(0)
+        test_neg_vec.append(this_vec)
 
     # Return the four feature vectors
     return train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec
