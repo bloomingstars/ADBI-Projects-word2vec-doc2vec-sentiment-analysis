@@ -36,20 +36,20 @@ if method == "w2v":
 
 def main():
     train_pos, train_neg, test_pos, test_neg = load_data(path_to_data)
-    
+    print("method is : ",method)
     # Using saved models and vectors for method == 'nlp'. (Orginal runtime = 5 mins; Current runtime = 10 seconds)
     if method == "nlp":
         #train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg)
-        filename = './'+path_to_data+'train_pos_vec_nlp.txt'
+        filename = './'+path_to_data+'train_pos'
         #pickle.dump(train_pos_vec, open(filename, 'wb'))
         train_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'train_neg_vec_nlp.txt'
+        filename = './'+path_to_data+'train_neg'
         #pickle.dump(train_neg_vec, open(filename, 'wb'))
         train_neg_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_pos_vec_nlp.txt'
+        filename = './'+path_to_data+'test_pos'
         #pickle.dump(test_pos_vec, open(filename, 'wb'))
         test_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_neg_vec_nlp.txt'
+        filename = './'+path_to_data+'test_neg'
         #pickle.dump(test_neg_vec, open(filename, 'wb'))
         test_neg_vec = pickle.load(open(filename, 'rb'))
 
@@ -436,7 +436,14 @@ def evaluate_model(model, test_pos_vec, test_neg_vec, print_confusion=False):
     """
     # Use the predict function and calculate the true/false positives and true/false negative.
     # YOUR CODE HERE
+    predicted_pos=model.predict(test_pos_vec)
+    predicted_negs=model.predict(test_neg_vec)
+    tp=predicted_pos.count('pos')
+    tn=predicted_negs.count('neg')
+    fp=predicted_negs.count('pos')
+    fn=predicted_pos.count('neg')
 
+    accuracy=(tp+tn)/(tp+tn+fp+fn)
     if print_confusion:
         print("predicted:\tpos\tneg")
         print("actual:")
