@@ -5,6 +5,9 @@ import sklearn.linear_model
 import nltk
 import random
 import _pickle as pickle
+
+from gensim_models import doc2vec_modified, word2vec
+
 random.seed(0)
 from numpy import zeros, empty, isnan, random, uint32, float32 as REAL, vstack
 from gensim.models.doc2vec import Doc2Vec,TaggedDocument
@@ -183,7 +186,6 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
 
     # Using the above words as features, construct binary vectors for each text in the training and test set.
     # These should be python lists containing 0 and 1 integers.
-    # YOUR CODE HERE
     train_pos_vec=[]
     for text in train_pos:
         this_vec=[]
@@ -237,6 +239,10 @@ def feature_vecs_DOC(train_pos, train_neg, test_pos, test_neg):
     # Doc2Vec requires TaggedDocument objects as input.
     # Turn the datasets from lists of words to lists of TaggedDocument objects.
     # YOUR CODE HERE
+    labeled_train_pos = [TaggedDocument(words, ["TRAIN_POS_" + str(i)]) for i, words in enumerate(train_pos)]
+    labeled_train_neg = [TaggedDocument(words, ["TRAIN_NEG_" + str(i)]) for i, words in enumerate(train_neg)]
+    labeled_test_pos = [TaggedDocument(words, ["TEST_POS_" + str(i)]) for i, words in enumerate(test_pos)]
+    labeled_test_neg = [TaggedDocument(words, ["TEST_NEG_" + str(i)]) for i, words in enumerate(test_neg)]
 
     # Initialize model
     model = Doc2Vec(min_count=1, window=10, size=100, sample=1e-4, negative=5, workers=4)
@@ -248,17 +254,25 @@ def feature_vecs_DOC(train_pos, train_neg, test_pos, test_neg):
     # This may take a bit to run
     for i in range(5):
         print("Training iteration %d" % (i))
-        random.shuffle(sentences)
         model.train(sentences,total_examples=model.corpus_count, epochs=model.iter)
     print("end of training")
 
     # Use the docvecs function to extract the feature vectors for the training and test data
     # YOUR CODE HERE
-
+    train_pos_vec=[]
+    train_neg_vec=[]
+    test_pos_vec=[]
+    test_neg_vec=[]
+    for i, words in enumerate(train_pos):
+        train_pos_vec.append( model.docvecs["TRAIN_POS_" + str(i)])
+    for i, words in enumerate(train_neg):
+        train_neg_vec.append( model.docvecs["TRAIN_NEG_" + str(i)])
+    for i, words in enumerate(test_pos):
+        test_pos_vec.append( model.docvecs["TEST_POS_" + str(i)])
+    for i, words in enumerate(test_neg):
+        test_neg_vec.append( model.docvecs["TEST_NEG_" + str(i)])
     # Return the four feature vectors
     return train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec
-
-
 
 
 def feature_vecs_DOC_W2V(train_pos, train_neg, test_pos, test_neg):
