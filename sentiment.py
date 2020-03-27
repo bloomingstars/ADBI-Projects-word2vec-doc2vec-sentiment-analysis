@@ -375,12 +375,19 @@ def build_models_NLP(train_pos_vec, train_neg_vec):
     """
     Returns a BernoulliNB and LosticRegression Model that are fit to the training data.
     """
-    Y = ["pos"]*len(train_pos_vec) + ["neg"]*len(train_neg_vec)
+    X=train_pos_vec+train_neg_vec#training data
+    Y = ["pos"]*len(train_pos_vec) + ["neg"]*len(train_neg_vec) # target data
 
     # Use sklearn's BernoulliNB and LogisticRegression functions to fit two models to the training data.
     # For BernoulliNB, use alpha=1.0 and binarize=None
     # For LogisticRegression, pass no parameters
     # YOUR CODE HERE
+
+    nb_model=sklearn.naive_bayes.BernoulliNB(alpha=1.0, binarize=None, fit_prior=True, class_prior=None)
+    lr_model=sklearn.linear_model.LogisticRegression()
+
+    nb_model.fit(X,Y)
+    lr_model.fit(X,Y)
     return nb_model, lr_model
 
 
@@ -394,6 +401,13 @@ def build_models_DOC(train_pos_vec, train_neg_vec):
     # Use sklearn's GaussianNB and LogisticRegression functions to fit two models to the training data.
     # For LogisticRegression, pass no parameters
     # YOUR CODE HERE
+    X = train_pos_vec + train_neg_vec
+    nb_model = sklearn.naive_bayes.GaussianNB()
+    nb_model.fit(X, Y)
+
+    lr_model = sklearn.linear_model.LogisticRegression()
+    lr_model.fit(X, Y)
+
     return nb_model, lr_model
 
 
