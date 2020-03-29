@@ -39,73 +39,73 @@ def main():
     print("method is : ",method)
     # Using saved models and vectors for method == 'nlp'. (Orginal runtime = 5 mins; Current runtime = 10 seconds)
     if method == "nlp":
-        #train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg)
-        filename = './'+path_to_data+'train_pos'
-        #pickle.dump(train_pos_vec, open(filename, 'wb'))
-        train_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'train_neg'
-        #pickle.dump(train_neg_vec, open(filename, 'wb'))
-        train_neg_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_pos'
-        #pickle.dump(test_pos_vec, open(filename, 'wb'))
-        test_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_neg'
-        #pickle.dump(test_neg_vec, open(filename, 'wb'))
-        test_neg_vec = pickle.load(open(filename, 'rb'))
-
-        #nb_model, lr_model = build_models_NLP(train_pos_vec, train_neg_vec)
-        filename = './'+path_to_data+'nb_model_nlp.sav'
-        #pickle.dump(nb_model, open(filename, 'wb'))
-        nb_model = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'lr_model_nlp.sav'
-        #pickle.dump(lr_model, open(filename, 'wb'))
-        lr_model = pickle.load(open(filename, 'rb'))
+        train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg)
+        # filename = './'+path_to_data+'train-pos.txt'
+        # #pickle.dump(train_pos_vec, open(filename, 'wb'))
+        # train_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'train-neg.txt'
+        # #pickle.dump(train_neg_vec, open(filename, 'wb'))
+        # train_neg_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test-pos.txt'
+        # #pickle.dump(test_pos_vec, open(filename, 'wb'))
+        # test_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test-neg.txt'
+        # #pickle.dump(test_neg_vec, open(filename, 'wb'))
+        # test_neg_vec = pickle.load(open(filename, 'rb'))
+        #
+        nb_model, lr_model = build_models_NLP(train_pos_vec, train_neg_vec)
+        # filename = './'+path_to_data+'nb_model_nlp.sav'
+        # #pickle.dump(nb_model, open(filename, 'wb'))
+        # nb_model = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'lr_model_nlp.sav'
+        # #pickle.dump(lr_model, open(filename, 'wb'))
+        # lr_model = pickle.load(open(filename, 'rb'))
 
     # Using saved models and vectors for method == 'd2v'. (Orginal runtime = 10 mins; Current runtime = 10 seconds)
     if method == "d2v":
-        #train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_DOC(train_pos, train_neg, test_pos, test_neg)
-        filename = './'+path_to_data+'train_pos_vec_d2v.txt'
-        #pickle.dump(train_pos_vec, open(filename, 'wb'))
-        train_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'train_neg_vec_d2v.txt'
-        #pickle.dump(train_neg_vec, open(filename, 'wb'))
-        train_neg_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_pos_vec_d2v.txt'
-        #pickle.dump(test_pos_vec, open(filename, 'wb'))
-        test_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_neg_vec_d2v.txt'
-        #pickle.dump(test_neg_vec, open(filename, 'wb'))
-        test_neg_vec = pickle.load(open(filename, 'rb'))
-
-        #nb_model, lr_model = build_models_DOC(train_pos_vec, train_neg_vec)
-        filename = './'+path_to_data+'nb_model_d2v.sav'
-        #pickle.dump(nb_model, open(filename, 'wb'))
-        nb_model = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'lr_model_d2v.sav'
-        #pickle.dump(lr_model, open(filename, 'wb'))
-        lr_model = pickle.load(open(filename, 'rb'))
+        train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_DOC(train_pos, train_neg, test_pos, test_neg)
+        # filename = './'+path_to_data+'train_pos_vec_d2v.txt'
+        # #pickle.dump(train_pos_vec, open(filename, 'wb'))
+        # train_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'train_neg_vec_d2v.txt'
+        # #pickle.dump(train_neg_vec, open(filename, 'wb'))
+        # train_neg_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test_pos_vec_d2v.txt'
+        # #pickle.dump(test_pos_vec, open(filename, 'wb'))
+        # test_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test_neg_vec_d2v.txt'
+        # #pickle.dump(test_neg_vec, open(filename, 'wb'))
+        # test_neg_vec = pickle.load(open(filename, 'rb'))
+        #
+        nb_model, lr_model = build_models_DOC(train_pos_vec, train_neg_vec)
+        # filename = './'+path_to_data+'nb_model_d2v.sav'
+        # #pickle.dump(nb_model, open(filename, 'wb'))
+        # nb_model = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'lr_model_d2v.sav'
+        # #pickle.dump(lr_model, open(filename, 'wb'))
+        # lr_model = pickle.load(open(filename, 'rb'))
 
 
     if method == "w2v":
         train_pos_vec, train_neg_vec, test_pos_vec, test_neg_vec = feature_vecs_DOC_W2V(train_pos, train_neg, test_pos, test_neg)
-        filename = './'+path_to_data+'train_pos_vec_w2v.txt'
-        pickle.dump(train_pos_vec, open(filename, 'wb'))
-        #train_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'train_neg_vec_w2v.txt'
-        pickle.dump(train_neg_vec, open(filename, 'wb'))
-        #train_neg_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_pos_vec_w2v.txt'
-        pickle.dump(test_pos_vec, open(filename, 'wb'))
-        #test_pos_vec = pickle.load(open(filename, 'rb'))
-        filename = './'+path_to_data+'test_neg_vec_w2v.txt'
-        pickle.dump(test_neg_vec, open(filename, 'wb'))
-        #test_neg_vec = pickle.load(open(filename, 'rb'))
-
+        # filename = './'+path_to_data+'train_pos_vec_w2v.txt'
+        # pickle.dump(train_pos_vec, open(filename, 'wb'))
+        # #train_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'train_neg_vec_w2v.txt'
+        # pickle.dump(train_neg_vec, open(filename, 'wb'))
+        # #train_neg_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test_pos_vec_w2v.txt'
+        # pickle.dump(test_pos_vec, open(filename, 'wb'))
+        # #test_pos_vec = pickle.load(open(filename, 'rb'))
+        # filename = './'+path_to_data+'test_neg_vec_w2v.txt'
+        # pickle.dump(test_neg_vec, open(filename, 'wb'))
+        # #test_neg_vec = pickle.load(open(filename, 'rb'))
+        #
         nb_model, lr_model = build_models_DOC_W2V(train_pos_vec, train_neg_vec)
-        filename = './'+path_to_data+'nb_model_w2v.sav'
-        pickle.dump(nb_model, open(filename, 'wb'))
-        filename = './'+path_to_data+'lr_model_w2v.sav'
-        pickle.dump(lr_model, open(filename, 'wb'))
+        # filename = './'+path_to_data+'nb_model_w2v.sav'
+        # pickle.dump(nb_model, open(filename, 'wb'))
+        # filename = './'+path_to_data+'lr_model_w2v.sav'
+        # pickle.dump(lr_model, open(filename, 'wb'))
 
     print("Naive Bayes")
     print("-----------")
@@ -182,7 +182,7 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
         pos_freq_word=all_positive_word.count(word)
         neg_freq_word=all_neg_word.count(word)
         if word not in stopwords and pos_freq_word > 0.01* len(all_positive_word) or neg_freq_word > 0.01* len(all_neg_word) and pos_freq_word>2*neg_freq_word or neg_freq_word>2* pos_freq_word:
-            featureTexts.add(word)
+            featureTexts.append(word)
 
     # Using the above words as features, construct binary vectors for each text in the training and test set.
     # These should be python lists containing 0 and 1 integers.
@@ -190,7 +190,7 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
     for text in train_pos:
         this_vec=[]
         for word in text:
-            if(featureTexts.contains(word)):
+            if(word in featureTexts):
                 this_vec.append(1)
             else:
                 this_vec.append(0)
@@ -200,7 +200,7 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
     for text in train_neg:
         this_vec = []
         for word in text:
-            if (featureTexts.contains(word)):
+            if (word in featureTexts):
                 this_vec.append(1)
             else:
                 this_vec.append(0)
@@ -210,7 +210,7 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
     for text in test_pos:
         this_vec = []
         for word in text:
-            if (featureTexts.contains(word)):
+            if (word in featureTexts):
                 this_vec.append(1)
             else:
                 this_vec.append(0)
@@ -220,7 +220,7 @@ def feature_vecs_NLP(train_pos, train_neg, test_pos, test_neg):
     for text in test_neg:
         this_vec = []
         for word in text:
-            if (featureTexts.contains(word)):
+            if (word in featureTexts):
                 this_vec.append(1)
             else:
                 this_vec.append(0)
